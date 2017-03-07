@@ -1,0 +1,63 @@
+<script type="text/javascript">
+    alert('something');
+</script>
+
+<div class="container bottom-margin">
+    <div class="row">
+        <div class="col-lg-3 col-md-2"></div>
+        <div class="col-md-8 col-lg-6 common-section reviews-list-section">
+            {{#unless isUserEdit}}
+            <div class="progress">
+              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 95%;">
+                {{__ 'Vaš profil je 85% napravljen'}}}
+              </div>
+            </div>
+            <hr/>
+            {{/unless}}
+            <h1>{{__ 'Obrazovanje za %s' somethingNice}}}</h1>
+            <div id="error-message" class="alert alert-danger" style="display: none;">
+                {{__ 'Greška pri unosu'}}}
+            </div>
+            {{#unless isUserEdit}}
+            <div class="bottom-margin">
+                {{__ 'Unesite vaše obrazovanje ili kliknite <a href="/recruiter/apply/success">dalje</a>ukoliko želite da preskočite ovaj korak.'}}}
+            </div>
+            {{/unless}}
+            <form
+                method="POST"
+                id="recruiter-apply-form-step3"
+                action="/recruiter/education{{#if isUserEdit}}?inline=1{{/if}}"
+                onsubmit="return RecruitersModule.validateEducation(this);">
+
+                {{#if user_education}}
+                    {{#each user_education}}
+                        {{>user_education}}
+                    {{/each}}
+                {{else}}
+                    {{>user_education}}
+                {{/if}}
+
+                <div class="bottom-margin">
+                    <a role="button" class="btn btn-sm btn-default" onclick="RecruitersModule.addEducation(this);">+ {{__ 'Škola'}}}</a>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="btn btn-success" type="submit">
+                            {{#if isUserEdit}}
+                                {{__ 'Snimi'}}}
+                            {{else}}
+                                {{__ 'Dalje'}}}...
+                            {{/if}}
+                        </button>
+                        <a href="{{#if isUserEdit}}/recruiter/profile{{else}}/recruiter/work_experience{{/if}}">
+                            {{__ 'Nazad'}}}
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-3 col-md-2"></div>
+    </div>
+</div>
+<script src="/js/recruiter.js"></script>

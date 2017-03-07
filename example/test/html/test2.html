@@ -1,0 +1,207 @@
+<div class="container bottom-margin">
+    <div class="row">
+        <div class="col-lg-3 col-md-2"></div>
+        <div class="col-md-8 col-lg-6 common-section reviews-list-section">
+            {{#unless isUserEdit}}
+            <div class="progress">
+              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 70%;">
+                {{__ 'Vaš profil je 70% napravljen'}}
+              </div>
+            </div>
+            <hr/>
+            {{/unless}}
+            <div class="row bottom-margin">
+                <div class="col-md-8 col-sm-8 col-xs-6">
+                    <h1>Osnovni Podaci</h1>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-6 text-right">
+                 {{#if user_details.photo_thumb_url}}
+                    <img src="{{user_details.photo_thumb_url}}" class="img img-responsive main-profile-image" alt="profilna slika" />
+                {{else}}
+                    <img src="/img/empty-avatar.jpg" class="img img-responsive main-profile-image" alt="profilna slika" />
+                {{/if}}
+                </div>
+            </div>
+            <div id="error-message" class="alert alert-danger" style="display: none;">
+                Greška pri unosu
+            </div>
+            {{#if user_registered}}
+            <div class="alert alert-danger">
+                Korisnik sa tim emailom je već registovan. <a href="/login?redirect_uri={{@root.redirectUri}}">Prijavite se</a>.
+            </div>
+            {{/if}}
+            <form
+                method="POST"
+                id="recruiter-general"
+                enctype="multipart/form-data"
+                action="/recruiter/general{{#if isUserEdit}}?inline=1{{/if}}"
+                onsubmit="return RecruitersModule.validateGeneral(this);">
+
+                <h3 class="green">Status</h3>
+                <div class="form-group">
+                    <div class="options-container">
+                        <div class="options-container-row">
+                            {{#each hiringStatuses}}
+                                <div class="options-container-cell" data-value="{{value}}"><small>{{label}}</small></div>
+                            {{/each}}
+                        </div>
+                        <input type="hidden" class="options-container-holder"
+                            value="{{#if @root.user_details.hiring_status}}{{@root.user_details.hiring_status}}{{else}}{{@root.defaultHiringStatus}}{{/if}}"
+                            name="hiring_status"
+                            id="hiring_status">
+                    </div>
+                    <div class="field-description">
+                        Zbog sigurnosti vaš trenutni i svi prethodni poslodavci neće moći da vide vaš profil ukoliko izaberete "Razmortio bih bolje poslove"
+                    </div>
+                </div>
+
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox"
+                        value="1"
+                        {{#if user_details.interested_in_working_abroad}} checked {{/if}}
+                        name="interested_in_working_abroad"> Zanima me rad u inostranstvu
+                    </label>
+                </div>
+
+                <div class="checkbox">
+                  <label>
+                    <input name="interest_full_time_jobs"
+                        type="checkbox"
+                        value="1"
+                        {{#if user_details}}
+                            {{#if user_details.interest_full_time_jobs}} checked {{/if}}
+                        {{else}}
+                            checked
+                        {{/if}}
+                        >
+                    Zanima me stalno zaposlenje
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input name="interest_part_time_jobs"
+                        type="checkbox"
+                        value="1"
+                         {{#if user_details}}
+                            {{#if user_details.interest_part_time_jobs}} checked {{/if}}
+                        {{else}}
+                            checked
+                        {{/if}}
+                        >
+                    Zanimaju me part-time/povremeni poslovi
+                  </label>
+                </div>
+                <hr/>
+
+                <h3 class="green">Generalne informacije</h3>
+
+                {{#if @root.loginInfo.user.email}}
+
+                {{else}}
+                <div class="form-group">
+                    <label class="contol-label">Email</label>
+                    <input type="text" class="form-control" id="email" name="email" placeholder="Email">
+                    <div class="field-description">
+                        Na ovaj email će vas kontaktirati poslodavci i preko njega ćete moći da ažurirate vaš profil na Ogledalo Firme.
+                    </div>
+                </div>
+                {{/if}}
+
+                <div class="form-group">
+                    <label class="contol-label">Ime i Prezime</label>
+                    <input class="form-control"
+                        id="full_name"
+                        name="full_name"
+                        {{#if user_details.full_name}} value="{{user_details.full_name}}" {{/if}}
+                        placeholder="Ime i Prezime">
+
+                    <div class="field-description">
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="contol-label">Telefon</label>
+                    {{user_details.phone}}
+                    <input class="form-control"
+                        id="phone"
+                        name="phone"
+                        {{#if user_details.phone}} value="{{user_details.phone}}" {{/if}}
+                        placeholder="Telefon">
+                    <div class="field-description">
+                    Na koji broj telefona kompanije mogu da vas kontaktiraju u vezi posla. Ukoliko izostavite ovo polje jedini način da vas kontaktira potencijalni poslodavac je preko emaila.
+                    </div>
+                </div>
+
+                <div class="form-group-inline">
+                    <label class="control-label">Godište</label>
+                    <select class="form-control" name="birthday_year">
+                        {{#each years}}
+                            <option value="{{year}}" {{#ifEqual @root.user_details.birthday_year year}}selected{{/ifEqual}} >
+                                {{year}}
+                            </option>
+                        {{/each}}
+                    </select>
+                    <div class="field-description">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Slika za CV</label>
+                    <input class="form-control" type="file" id="cv_photo" name="cv_photo" accept="image/*">
+                    <div class="field-description">
+                        Slika nije obavezna ali mnogo povećava šansu da vas poslodavac primeti
+                    </div>
+                </div>
+
+                <hr/>
+                <h3 class="green">Dodatne informacije</h3>
+
+                <div class="form-group bottom-margin">
+                    <label class="control-label">Koliku mesečnu neto platu očekujete?</label>
+                    <div class="options-container">
+                        <div class="options-container-row">
+                            {{#each expected_monthly_salaries}}
+                                <div class="options-container-cell" data-value="{{value}}"><small>{{label}}</small></div>
+                            {{/each}}
+                        </div>
+                        <input type="hidden"
+                            class="options-container-holder"
+                            value="{{@root.user_details.desired_salary_range}}"
+                            name="expected_monthly_salary">
+                    </div>
+                </div>
+
+                <div class="form-group bottom-margin">
+                    <label class="control-label">Kategorija Vozačke dozvole</label>
+                    <div class="options-container">
+                        <div class="options-container-row">
+                            {{#each driver_license}}
+                                <div class="options-container-cell" data-value="{{value}}"><small>{{label}}</small></div>
+                            {{/each}}
+                        </div>
+                        <input type="hidden"
+                            class="options-container-holder"
+                            value="{{@root.user_details.driver_license}}"
+                            name="driver_license">
+                    </div>
+                </div>
+                <hr/>
+
+                <button class="btn btn-success" type="submit">
+                    {{#if isUserEdit}}
+                        {{___ 'Snimi'}}
+                    {{else}}
+                        Dalje...
+                    {{/if}}
+                </button>
+                <a href="{{#if isUserEdit}}/recruiter/profile{{else}}/recruiter/skills{{/if}}">
+                    Nazad
+                </a>
+            </form>
+        </div>
+        <div class="col-lg-3 col-md-2"></div>
+    </div>
+</div>
+<script src="/js/recruiter.js"></script>

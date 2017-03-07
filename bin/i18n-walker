@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+'use strict';
+
+const commandLineArgs = require('command-line-args');
+
+const optionDefinitions = [
+    { name: 'clean', type: Boolean, defaultValue: false},
+    { name: 'src', type: String, multiple: true},
+    { name: 'out', type: String},
+    { name: 'recommend', type: Boolean, defaultValue: true},
+];
+
+const options = commandLineArgs(optionDefinitions);
+
+if (!options.src || options.src.length === 0) {
+    console.log('missing at least one src argument');
+    process.exit(1);
+}
+
+if (!options.out || options.out.length === 0) {
+    options.out = './locales';
+}
+
+var tw = require('../lib/i18n-walker');
+tw.setOptions(options);
+tw.run();
