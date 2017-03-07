@@ -1,6 +1,6 @@
 {
   "name": "i18n-walker",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Makes translator files from js source code and HTML pages",
   "main": "./lib/i18n-walker.js",
   "bin": {
@@ -23,6 +23,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/visla/i18n-walker.git"
-  },
+    "url": "https://github.com/visla/i18n-walker.git"
+  }
 }
