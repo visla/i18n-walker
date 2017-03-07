@@ -1,6 +1,6 @@
 {
   "name": "i18n-walker",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Makes translator files from js source code and HTML pages",
   "main": "./lib/i18n-walker.js",
   "bin": {
@@ -17,6 +17,7 @@
     "jsonfile": "2.4.0",
     "htmlparser2": "3.9.2",
     "command-line-args": "4.0.1",
+    "command-line-usage": "4.0.0",
     "underscore": "1.8.3",
     "glob": "7.1.1",
     "async": "2.1.5"

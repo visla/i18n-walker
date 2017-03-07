@@ -2,6 +2,39 @@
 'use strict';
 
 const commandLineArgs = require('command-line-args');
+const getUsage = require('command-line-usage')
+
+const sections = [
+  {
+    header: 'i18n-walker',
+    content: 'Generates translation files from js and html code'
+  },
+  {
+    header: 'Options',
+    optionList: [
+      {
+        name: 'src',
+        typeLabel: '[underline]{folder}',
+        description: '(REQUIRED) The input folder to process. Use glob matching idea.'
+      },
+      {
+        name: 'out',
+        typeLabel: '[underline]{folder}',
+        description: 'Folder where to make output local files. By default is ./locales'
+      },
+      {
+        name: 'clean',
+        description: 'If set all locales json files will be cleaned and any orphans removed. Using this ' +
+         'by mistake could erase your translation entries.'
+      },
+      {
+        name: 'recommend',
+        description: 'If this one is set tool will output recommended strings that might need translations'
+      },
+    ]
+  }
+];
+const usage = getUsage(sections);
 
 const optionDefinitions = [
     { name: 'clean', type: Boolean, defaultValue: false},
@@ -13,7 +46,7 @@ const optionDefinitions = [
 const options = commandLineArgs(optionDefinitions);
 
 if (!options.src || options.src.length === 0) {
-    console.log('missing at least one src argument');
+    console.log(usage)
     process.exit(1);
 }
 
