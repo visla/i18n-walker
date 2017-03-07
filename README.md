@@ -7,6 +7,10 @@ If you add new locale json file it will automatically populate it.
 
 Designed to work for i18 node package.
 
+## Installation
+
+npm install -g i18n-walker
+
 ## HTML Code translations
 If your html code has the following templating (handlebars) {{__ 'Translate this'}} it would be found by the tool and create translations. This is default settings.
 
