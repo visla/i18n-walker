@@ -1,7 +1,7 @@
 {
   "name": "i18n-walker",
-  "version": "1.0.5",
-  "description": "Makes translator files from js source code and HTML pages",
+  "version": "1.0.6",
+  "description": "Generate locale files ready for translations from js source code and HTML pages",
   "main": "./lib/i18n-walker.js",
   "bin": {
     "i18n-walker": "./bin/i18n-walker"
