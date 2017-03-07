@@ -1,6 +1,6 @@
 {
   "name": "i18n-walker",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Makes translator files from js source code and HTML pages",
   "main": "./lib/i18n-walker.js",
   "bin": {

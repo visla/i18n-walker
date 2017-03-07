@@ -1,4 +1,4 @@
-## i18n-walker
+# i18n-walker
 
 Generates translatio files from your JS source code files and HTML files that rely on handlebars.
 This tool will create and manage your files that should be translated. It will automatically update
@@ -20,9 +20,9 @@ The tool is customizable and you could change how you scan your html files by pr
 
 You can try this example to get default.json locales file.
 
-i18n-walker --src example/test/js/*.js example/test/html/*.html \
+`i18n-walker --src example/test/js/*.js example/test/html/*.html \
     --out example/locales \
-    --recommend=1 --clean
+    --recommend=1 --clean`
 
 Try changing this example/locales/default.json file somehow and running command again. You will see
 changed entries won't be touched.
