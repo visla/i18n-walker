@@ -11,6 +11,26 @@ Designed to work for i18 node package.
 
 npm install -g i18n-walker
 
+## What it Does?
+
+1. Let say your js code look like this
+```javascript
+    var message = __('Translate this message %s', companyName);
+    var anotherMessage = 'This is something that needs translation';
+```
+2. i18n-walker will scan your code find those entries and create/update locale files with proper entry.
+Your JSON locale file will have 'Translate this message %s' entry
+
+3. i18n-walker (if used with `--recommend` switch) would suggest you add translation function to anotherMessage.
+
+4. If you change source code to include this new translation
+```javascript
+    var message = __('Translate this message %s', companyName);
+    var anotherMessage = __('This is something that needs translation');
+```
+i18n-walker will update your locale files but it won't touch existing translations.
+So it is safe to add new translations as your code evolves by just running i18n-walker again.
+
 ## HTML Code translations
 If your html code has the following templating (handlebars) {{__ 'Translate this'}} it would be found by the tool and create translations. This is default settings.
 
