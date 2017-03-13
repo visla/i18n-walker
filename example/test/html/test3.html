@@ -1,0 +1,49 @@
+<div class="container bottom-margin">
+    <div class="row">
+        <div class="col-lg-12 common-section">
+            <h1>
+                {{__ 'Kompanije za Odobravanje'}} {{#if onlyIgnored}}(IGNORISANE){{/if}}
+            </h1>
+            <div class="bottom-margin">
+                <a href="/backend/companies/1">{{__ 'Prikaži standardno'}}</a>
+                <a href="/backend/companies/1?onlyIgnored=1">{{__ 'Prikaži samo ignorisane'}}</a>
+            </div>
+            <div class="backend-companies">
+                <div class="table-responsive">
+                <table class="table table-condensed table-striped table-bordered table-hover">
+                    <thead>
+                        <th>#</th>
+                        <th>{{__ 'Kompanija'}}</th>
+                        <th>{{__ 'Napravljen'}}</th>
+                        <th>IP</th>
+                        <th>{{__ 'Plata'}}/<br/>{{__ 'Komentara'}}</th>
+                        <th>Website</th>
+                        <th>{{__ 'Grad'}}</th>
+                        <th>{{__ 'Zaposlenih'}}</th>
+                        <th>{{__ 'U CV-u'}}</th>
+                        <th>{{__ 'Odobreno'}}</th>
+                        <th>{{__ 'Obrisi'}}</th>
+                        <th>{{__ 'Opcije'}}</th>
+                    </thead>
+                    <tbody>
+                        {{#each companies}}
+                            {{>backend_company}}
+                        {{/each}}
+                    </tbody>
+                </table>
+                </div>
+            </div>
+            {{>pagination}}
+            <div>
+                <a href="/backend">{{__ 'Nazad'}}</a>
+            </div>
+        </div>
+    </div>
+<div>
+
+{{>add_company_name_modal}}
+{{>link_company_modal}}
+{{>rename_company_modal}}
+
+<script src="/js/backend-companies.js"></script>
+<script src="/js/companies.js"></script>

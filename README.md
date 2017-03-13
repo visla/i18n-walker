@@ -52,7 +52,7 @@ changed entries won't be touched.
 
 ## Version History
 
-1.0.8
+1.0.9
 	- Fixed bug with regexp being to greedy on HTML
 	- Adding some additional logging
 1.0.6
