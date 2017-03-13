@@ -49,3 +49,10 @@ changed entries won't be touched.
 
 ## Future
 1. Add switch for html template that is used. So far you would need to provide your own regexp but ideally you should be able to set name of the most popular templating engine that you use and tool should be able to handle those.
+
+## Version History
+
+1.0.7
+	- Fixed bug with regexp being to greedy on HTML
+1.0.6
+	- First public version
