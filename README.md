@@ -51,7 +51,7 @@ changed entries won't be touched.
 1. Add switch for html template that is used. So far you would need to provide your own regexp but ideally you should be able to set name of the most popular templating engine that you use and tool should be able to handle those.
 
 ## Version History
-1.0.12
+1.0.13
 	- Fixed problem with matching entries that have escaped single quotes.
 	- Added support for analysing .txt files.
 	- HTML entries are cleaned of excessive characters as they don't affect html rendering
